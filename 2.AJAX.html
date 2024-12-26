@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+</head>
+<body>
+    <script>
+        /*apa itu AJAX?
+        AJAX adalah singkatan dari Asycronus Javascript and XML
+        AJAX biasanya di gunakan untuk memngambil atau mengirim data URL lain
+        untuk membuat AJAX kita bisa menggunakan class XMLHttpRequest
+        */
+    
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', 'api/hello.json');
+        ajax.send();
+
+        //silahkan buka di inspect di network
+        
+    </script>
+</body>
+</html>
