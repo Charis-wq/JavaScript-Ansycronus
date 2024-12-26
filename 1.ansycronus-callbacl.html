@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asycronus-Callback</title>
+</head>
+<body>
+    <h2 id="waktu"></h2>
+    <script>
+        /*apa itu syncronus?
+        syncronus adalah program dalam javascript secara default akan di eksekusi baris perbaris
+        maksudnya baris selanjutnya akan di eksekusi setelah aris sebelumnya selesai di kerjakan 
+        proses syncronus juga bisa di sebut juga Blocking,karena harus menunggu tiap proses
+        selesai baru proses selanjutnya bisa di lakukan.*/
+
+        /*apa itu asycronus?
+        Asycronus adalah kebalikan dari syncronus kita bisa membuat proses di javascript
+        tidak akan menunggu proses syncronus melainkan akan melanjutkan proses selanjutnya
+        tanpa harus menunggu proses syncronus selesai,proses asyncronus bisa juaga disebut
+        Non-Blocking.*/
+
+        /*apa itu callback?
+        callback adalah mekanisme untuk memanggil kembali kode yang ada di program dari proses
+        asyncronus
+        callback biasanya dibuat  dalam bentuk function as parameter,dan parameter function tersebut
+        akan dieksekusi saat proses asyncronus selesai 
+        dengan menggunakan callback proram bisa menemukan informasi yang di butuhkan dari proses
+        yang berjalan secara asyncronus.*/
+
+        /*asycronus method
+        ada banyak method asycronus yang terdapat  di javascript sebenarnya
+        setTimeout(callback, timeInMilis) biasnya di gunakan untuk menjalankan proses
+        asycronus sekali dalam waktu tertentu.
+
+        setInterval(callback, timeInMilis) biasanya di gunakan untuk menjalankan proses
+        asycronus secara periodik dalam waktu tertentu.
+        */
+
+        //contoh method setTimeout()
+
+        function addElement(){
+            const header = document.createElement('h1')
+            header.textContent = 'INI JUDUL!';
+
+            document.body.appendChild(header);
+        }
+
+        setTimeout(addElement, 5000);
+
+        //contoh method set interval()
+        function waktu(){
+            const waktu = document.getElementById('waktu');
+            waktu.textContent = new Date().toString();
+
+        }
+
+        setInterval(waktu, 1000);
+
+       
+    </script>
+</body>
+</html>
