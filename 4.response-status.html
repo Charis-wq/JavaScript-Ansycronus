@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response Status</title>
+</head>
+<body>
+    <h1 id="response"></h1>
+    <script>
+        /*AJAX adalah proses komunikasi client dan server
+        dalam komunikasi client dan server kita tidak bisa selalu menganggap
+        proses teersebut akan berjalan lancar
+        akan ada banyak hal yang bisa menggangu proses AJAX yang bisa menyebabkan error
+        seperti koneksi internet,error dari server,data dari client tidak valid 
+        dan lain sebagainya
+        server biasanya akan mengirim HTTP status code yang sesuai dengan jenis responsenya
+        untuk mengetahui status response dari server kita bisa menggunakan property status.
+        */
+       function displayResponse(json){
+        const header = document.getElementById("response");
+            header.textContent = json.response;
+       }
+
+
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', 'api/hello.json');
+        //ajax.open('GET', 'api/salah.json');//ini akan terjadi 404 not found
+        ajax.addEventListener("load", function (){
+           if(ajax.status === 200){
+            const json = JSON.parse(ajax.responseText);
+            displayResponse(json);
+           }else {
+            displayResponse({
+                response: `Terjadi kesalahan dengan Status ${ajax.status}`
+            })
+           }
+
+            
+        })
+        ajax.send();
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State di AJAX</title>
+</head>
+<body>
+    <h1 id="response"></h1>
+    <script>
+        /*AJAX memiliki tahapan state di mana kita bisa medapatkan banyak sekali 
+        state di ajax menggunakan property readyState 
+        property readyState mengembalikan number di mana tiap number merupakan representasi
+        dari statenya.
+
+        value      state         description
+        0          UNSENT        client sudah di buat open() tapi belum di call
+        1          OPENED        open() sudah di call
+        2     HEADERS_RECEIVED   send() sudah di call tetapi header dan status tidak ada
+        3          LOADING       Downloading; responsText sedang mendownload
+        4          DONE          ini sudah selesai
+
+        ready state change event 
+        jika kita ingin mendengakar perubahan yang terjadi pada state 
+        kita bisa menggunkan event readystatechange
+        */
+        function displayResponse(json){
+        const header = document.getElementById("response");
+            header.textContent = json.response
+       }
+
+
+        const ajax = new XMLHttpRequest();
+        //contoh ready state change event
+        ajax.onreadystatechange = function (){
+            console.log(`Ready State Change${ajax.readyState}`);
+
+        };
+        ajax.open('GET', 'api/hello.json');
+        //ajax.open('GET', 'api/salah.json');//ini akan terjadi 404 not found
+        ajax.addEventListener("load", function (){
+           if(ajax.status === 200){
+            const json = JSON.parse(ajax.responseText);
+            displayResponse(json);
+           }else {
+            displayResponse({
+                response: `Terjadi kesalahan dengan Status ${ajax.status}`
+            })
+           }
+
+            
+        })
+        ajax.send();
+    </script>
+</body>
+</html>
