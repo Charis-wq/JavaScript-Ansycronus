@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Hell</title>
+</head>
+<body>
+    <script>
+        /*callback hell terjadi ketika kita memiliki banyak oprasi asycronus yang bergantung satu sama lain
+        sehingga callback di panggil berulang kali di dalam callback sebelumnya 
+        ini sering kali membuat kode menjadi sulit dibaca dan dipelihara,karena identasi yang terus bertambah 
+        contoh:
+        1.mengambil data pengguna
+        2.mengamil postingan pengguna berdasarkan data pengguna 
+        3.mengambil komentar dari postingan tersebut.
+        */
+
+        //contoh yang salah
+        function getUser(userId, callback){
+            setTimeout(() =>{
+                console.log('Fatching user...')
+                callback(null, (id: userId, name: 'charis'));
+            }, 1000);
+        }
+
+        function getUserPost(userId, callback){
+            setTimeout(() => {
+            console.log(`Fetching post for user ${userId}`);
+            callback(null, [
+                {id: 101, title: 'post 1'},
+                {id: 101, title: 'post 2'}
+            ]);
+          }, 1000);
+        }
+
+        function getPostComments(postId, callback){
+            setTimeout(() => {
+                console.log(`Fetching comments for post ${postId}`);
+                callbacK(null, [
+                    {id: 1, comment: 'Great post!'},
+                    {id: 2, comment: 'Thanks for sharing!'}
+                ]);
+            }, 1000);
+        }
+
+        //mulai mengambil data pengguna
+        getUser(1, (userError, user) => {
+            if(userError){
+                console.error('Error fetching user:', userError);
+            }else{
+                console.log('User:', user);
+
+                //mengambil postingan pengguna
+                getUserPost(userid, (postError, posts) => {
+                    if(postError){
+                        console
+                    }
+                })
+
+            }
+        })              
+                
+       
+    </script>
+</body>
+</html>

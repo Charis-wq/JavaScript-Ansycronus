@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+    <script>
+        /*callback function adalah function yang dikirim sebagai argument ke fnction
+        lain dan di panggil ke dalam function tersebut.
+        callback memeungkinkan kita  untk memproses data hanya setelah data di ambil 
+        dari API tanpa memblokir eksekusi kode lainnya.
+        */
+
+        function getUserData(callback){
+            setTimeout(() => {
+            const userData ={
+                id: 1,
+                name: 'Charis',
+                email: 'Charis.hotmail.com'
+            }
+            callback(null, userData)
+        },2000)
+        }
+
+        function displayUserData(error, userData){
+          if(error){
+            console.error('Error fetching user data :', error)
+          }else{
+            console.log('User Data: ', userData)
+          }
+        }
+
+        getUserData(displayUserData)
+    </script>
+</body>
+</html>
