@@ -20,7 +20,7 @@
         function getUser(userId, callback){
             setTimeout(() =>{
                 console.log('Fatching user...')
-                callback(null, (id: userId, name: 'charis'));
+                callback(null, {id: userId, name: 'charis'});
             }, 1000);
         }
 
@@ -52,15 +52,29 @@
                 console.log('User:', user);
 
                 //mengambil postingan pengguna
-                getUserPost(userid, (postError, posts) => {
+                getUserPost( user.id, (postError, posts) => {
                     if(postError){
-                        console
+                        console.error('Error Fetching post:', postError);
+                    }else{
+                        console.log('Posts:', posts);
+
+                        //mengambil komentar dari postingan pertama
+                        getPostComments(posts[0].id, (commentsError, comments) =>{
+                            if(commentsError){
+                                console.error('error Fetching Comments');
+                            
+                            } else{
+                                console.log('Comments for post 1:', comments);
+                            }
+                        })
                     }
                 })
 
             }
         })              
-                
+              
+        
+        //lihatlah ini akan sangat membingungkan 
        
     </script>
 </body>

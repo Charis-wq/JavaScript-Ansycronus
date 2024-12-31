@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <script>
+        /*promises adalaha cara untuk menangani operasi asycronus secara lebih 
+        bersih dari pada callback ppromises adalah objeck yang mewakili keberhasilan atau
+        kegagalan suatu operasi asycronus.
+
+        state of promises :
+        1.pending : promise sedang berjalan 
+        2.fulfilled : promise berhasil di selesaikan 
+        3.rejected : promise mengalami kegagalan 
+        */
+
+        function checkShtock(product){
+            return new Promise((resolve, reject) => {
+                console.log(`Checking stock for ${product}`);
+
+                //simulasi mengecek stock
+                setTimeout(() => {
+                    const stockAvailable = true ;
+                    if(stockAvailable){
+                        resolve(`${product} is available in stock`)
+                    }else{
+                        reject(`${product} is out of stock `)
+                    }
+                    
+                })
+            })
+        }
+
+        checkShtock('Laptop')
+        .then((message) => {
+            console.log(message);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+    </script>
+</body>
+</html>
